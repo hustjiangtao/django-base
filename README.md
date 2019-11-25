@@ -31,7 +31,7 @@ python manage.py startapp demo
 - sql migrate
 
 ```bash
-python manage.py make migrations
+python manage.py makemigrations
 python manage.py migrate
 ```
 
