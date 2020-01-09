@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # third apps
+    'rest_framework',
     # self apps
 ]
 
@@ -128,3 +129,28 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# csrf
+if DEBUG:
+    INSTALLED_APPS.append('corsheaders')
+    MIDDLEWARE.append('corsheaders.middleware.CorsMiddleware')
+    CORS_ORIGIN_ALLOW_ALL = True
+    CORS_ALLOW_CREDENTIALS = True
+    from corsheaders.defaults import default_headers
+    CORS_ALLOW_HEADERS = default_headers + (
+        'X-Token',
+    )
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        # 'rest_framework.renderers.BrowsableAPIRenderer',
+        # 'utils.custom_response.JSONRenderer',
+    ],
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ),
+    # 'EXCEPTION_HANDLER': 'utils.custom_exception.custom_exception_handler',
+    'DATETIME_FORMAT': '%Y-%m-%d %H:%M:%S'
+}
+
